@@ -63,6 +63,10 @@ function Deck() {
         }
     };
 
+    {deck.cards && deck.cards.map(card => (
+        <Card key={card.id} card={card} deckId={deck.id} />
+      ))}
+
     return (
         <div>
              {/* Breadcrumb navigation */}
