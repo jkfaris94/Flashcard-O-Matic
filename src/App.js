@@ -1,25 +1,19 @@
 import { Routes, Route } from "react-router-dom";
+import Deck from "./components/decks/Deck";
+import Header from "./common/Header"
 
 function App() {
   return (
     <>
       <Header />
-      
+      <div className="container">
       <Routes>
-        <Route path="/" element={"App"} name="home Page"/> //displays decks and description
+        <Route path="/decks/:deckId" element={<Deck />}></Route>
 
-        <Route path="/decks" element={"decks"}>
-          <Route path="/:deckId" element={"deckId"}>
-            <Route path="/cards" element={"cards"}>
-              <Route path="/:cardId" element={"cardId"}>
-              </Route>
-            </Route>
-          </Route>
-        </Route>
-
-
-        <Route path="*" element={<p>Not found.</p>} />
+        <Route path="*" element={<div>Not Found</div>} />
       </Routes>
+      </div>
+
     </>
   );
 }
