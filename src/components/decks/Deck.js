@@ -23,6 +23,7 @@
 // Has a Delete button that allows that card to be deleted.
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import Card from "../cards/Card";
 
 function Deck() {
     const { deckId } = useParams();
@@ -32,27 +33,30 @@ function Deck() {
 
     //fetch data from mock API
     useEffect(() => {
-        const abortController = new AbortController();
+      const abortController = new AbortController();
 
-        fetch(`http://mockhost/decks/${deckId}`, { signal: abortController.signal })
-            .then((response) => {
-                if (!response.ok) throw new Error("network response was not ok");
-                return response.json();
-            })
-            .then(setDeck)
-            .catch((error) => {
-                if (error.name !== "AbortError") {
-                    console.error(error);
-                }
+      async function loadDeck() {
+          try {
+            const response = await fetch(`http://mockhost/decks/${deckId}`, {
+              signal: abortController.signal,
             });
 
-        return () => {
-            abortController.abort();
-        };
-    }, [deckId]);
+            const data = await response.json();
+            setDeck(data);
+          } catch (error) {
+            if (error.name !== "AbortError") {
+              setError(error);
+            }
+          }
+        }
 
-    if (error) return <p>Error loading deck.</p>;
-    if (!deck) return <p>Loading...</p>;
+        loadDeck();
+
+        return () => {
+          abortController.abort();
+        };
+        }, [deckId]);
+      
 
     const handleDeleteDeck = () => {
         const confirm = window.confirm("Are you sure you want to delete this deck?");
@@ -63,11 +67,11 @@ function Deck() {
         }
     };
 
-    {deck.cards && deck.cards.map(card => (
-        <Card key={card.id} card={card} deckId={deck.id} />
-      ))}
+    if (error) return <p>Error loading deck: {error.message}</p>;
+    if (!deck) return <p>Loading...</p>;
 
     return (
+      
         <div>
              {/* Breadcrumb navigation */}
       <nav>
@@ -90,6 +94,15 @@ function Deck() {
         </Link>
         <button onClick={handleDeleteDeck}>Delete</button>
       </div>
+      {/* Cards List */}
+      <h3>Cards</h3>
+            {deck.cards && deck.cards.length > 0 ? (
+              deck.cards.map((card) => (
+                <Card key={card.id} card={card} deckId={deck.id} />
+              ))
+            ) : (
+              <p>No cards in this deck.</p>
+            )}
       </div>
     );
 }
