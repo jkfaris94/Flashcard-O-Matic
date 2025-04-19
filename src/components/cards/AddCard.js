@@ -6,3 +6,9 @@
 // A form is shown with the "front" and "back" fields for a new card. Both fields use a <textarea> tag that can accommodate multiple lines of text.
 // If the user clicks Save, a new card is created and associated with the relevant deck. Then the form is cleared and the process for adding a card is restarted.
 // If the user clicks Done, the user is taken to the Deck screen.
+import React from "react";
+import { Link, useNavigate } from "react-router-dom"
+
+function AddCard() {
+    const navigate = useNavigate();
+}
