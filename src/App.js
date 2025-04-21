@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Decks from "./decks/Decks";
 import Deck from "./decks/Deck";
 import Header from "./common/Header"
 import Card from "./cards/Card";
@@ -10,6 +11,7 @@ function App() {
       <Header />
       <div className="container">
       <Routes>
+        <Route path="/" element={<Decks />}></Route>
         <Route path="/decks/:deckId" element={<Deck />}></Route>
         <Route path="/decks/:deckId/cards/:cardId" element={<Card />}></Route>
         <Route path="/decks/:deckId/cards/:cardId/edit" element={<EditCard />}></Route>
