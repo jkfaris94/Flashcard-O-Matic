@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Deck from "./components/decks/Deck";
+import Deck from "./decks/Deck";
 import Header from "./common/Header"
-import Card from "./components/cards/Card";
-import EditCard from "./components/cards/EditCard";
+import Card from "./cards/Card";
+import EditCard from "./cards/EditCard";
 
 function App() {
   return (
