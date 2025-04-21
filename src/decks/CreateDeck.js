@@ -13,7 +13,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 function CreateDeck() {
     const [formData, setFormData] = useState({ name: "", description: ""});
-    useNavigate();
+    const navigate = useNavigate();
 
     const handleChange = ({ target }) => {
         setFormData({ ...formData, [target.name]: target.value });
@@ -86,3 +86,5 @@ function CreateDeck() {
       </div>
     );
 }
+
+export default CreateDeck;
