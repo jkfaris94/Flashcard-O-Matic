@@ -41,12 +41,12 @@ function EditCard() {
     //TODO: handleSubmit
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+        
         try {
             const response = await fetch(`http://mockhost/decks/${deckId}/cards/${cardId}`, {
-                method: "put",
+                method: "PUT",
                 headers: {
-                    "content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     ...card,
