@@ -57,6 +57,9 @@ function EditDeck() {
         } catch (error) {
             console.error("Failed to update deck:", error);
         }
+
+        navigate(`/decks/${deckId}`);
+
     };
 
     return (
