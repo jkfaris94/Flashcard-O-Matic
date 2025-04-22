@@ -6,6 +6,7 @@ import Card from "./cards/Card";
 import EditCard from "./cards/EditCard";
 import CreateDeck from "./decks/CreateDeck";
 import Study from "./decks/Study";
+import EditDeck from "./decks/EditDeck";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/decks/:deckId/cards/:cardId/edit" element={<EditCard />}></Route>
         <Route path="/decks/new" element={<CreateDeck />}></Route>
         <Route path="/decks/:deckId/study" element={<Study />}></Route>
+        <Route path="/decks/:deckId/edit" element={<EditDeck />}></Route>
        
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
