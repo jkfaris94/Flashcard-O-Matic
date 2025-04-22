@@ -1,10 +1,3 @@
-// The Edit Card screen allows the user to modify information on an existing card.
-// The Edit Card screen has the following features:
-
-// The path to this screen should include the deckId and the cardId (i.e., /decks/:deckId/cards/:cardId/edit).
-// There is a breadcrumb navigation bar with a link to home /, followed by the name of the deck of which the edited card is a member, and finally the text Edit Card :cardId (e.g., Home / React Router / Edit Card 3).
-// It displays the same form as the Add Card screen, except it is prefilled with information for the existing card. It can be edited and updated.
-// If the user clicks on either Save or Cancel, the user is taken to the Deck screen.
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
@@ -12,31 +5,47 @@ function EditCard() {
     const { deckId, cardId } = useParams();
     const [card, setCard] = useState({front: "", back: ""});
     const navigate = useNavigate();
-    // xTODO: useState
+    
 
     //xTODO: useEffect
     useEffect(() => {
         const abortController = new AbortController(); 
 
-        async function loadCard() {
+        async function loadData() {
             try {
-                const response = await fetch(
-                    `http://mockhost/decks/${deckId}/cards/${cardId}`,
-                    { signal: abortController.signal }
-                );
-            const data = await response.json();
-            setCard({ front: data.front, back: data.back });
+              // Step 1: Validate deck
+              const deckResponse = await fetch(`http://mockhost/decks/${deckId}`, {
+                signal: abortController.signal,
+              });
+      
+            //   if (!deckResponse.ok) throw new Error("Deck not found");
+            //   await deckResponse.json(); // We don't need to save deck here
+      
+              // Step 2: Fetch card
+              const cardResponse = await fetch(
+                `http://mockhost/decks/${deckId}/cards/${cardId}`,
+                { signal: abortController.signal }
+              );
+      
+            //   if (!cardResponse.ok) throw new Error("Card not found");
+      
+              const data = await cardResponse.json();
+              setCard({ front: data.front, back: data.back });
             } catch (error) {
-                if (error.name !== "AbortError") {
-                    console.error("failed to load card:", error);
+              if (error.name !== "AbortError") {
+                console.error("Redirecting due to error:", error.message);
+                if (error.message === "Deck not found") {
+                  navigate("/"); // Invalid deck → home
+                } else {
+                  navigate(`/decks/${deckId}`); // Invalid card → deck page
                 }
+              }
             }
-        }
-        
-        loadCard();
-
-        return () => abortController.abort();
-    }, [deckId, cardId]);
+          }
+      
+          loadData();
+          return () => abortController.abort();
+        }, [deckId, cardId, navigate]);
 
     //TODO: handleSubmit
     const handleSubmit = async (event) => {

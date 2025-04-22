@@ -31,13 +31,14 @@ function EditDeck() {
             } catch (error) {
                 if (error.name !== "AbortError") {
                     console.error("Failed to load deck", error);
+                    navigate("/");
                 }
             }
         }
 
         loadDeck();
         return () => abortController.abort();
-    }, [deckId]);
+    }, [deckId, navigate]);
 
     const handleChange = ({ target }) => {
         setDeck({ ...deck, [target.name]: target.value });

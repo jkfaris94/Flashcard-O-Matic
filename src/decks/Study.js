@@ -21,13 +21,13 @@ function Study() {
             } catch (error) {
                 if (error.name !== "AbortError") {
                     console.log("Failed to load deck:", error);
+                    navigate("/");
                 }
             }
         }
-
         loadDeck();
         return () => abortController.abort();
-    }, [deckId]);
+    }, [deckId, navigate]);
 
     const handleFlip = () => setShowBack((prev) => !prev);
 

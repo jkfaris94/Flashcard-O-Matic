@@ -29,13 +29,14 @@ function AddCard() {
             } catch (error) {
                 if (error.name !== "AbortError") {
                     console.error("Failed to lod deck:", error);
+                    navigate("/");
                 }
             }
         }
 
         loadDeck();
         return () => abortController.abort();
-    }, [deckId]);
+    }, [deckId, navigate]);
 
     const handleChange = ({ target }) => {
         setFormData({ ...formData, [target.name]: target.value });
