@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom"
 
 function Card ({ card, deckId }) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const handleDeleteCard = () => {
