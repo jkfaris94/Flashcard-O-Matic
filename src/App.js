@@ -17,8 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Decks />}></Route>
 
-        <Route path="/decks">
-          <Route path="/decks/new" element={<CreateDeck />} />
+        <Route path="decks">
+          <Route path="new" element={<CreateDeck />} />
 
           <Route path=":deckId" element={<Deck />}>
             <Route path="edit" element={<EditDeck />} />

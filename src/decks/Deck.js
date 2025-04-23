@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, Outlet } from 'react-router-dom';
 import Card from "../cards/Card";
 
 function Deck() {
@@ -79,6 +79,7 @@ function Deck() {
             ) : (
               <p>No cards in this deck.</p>
             )}
+          <Outlet />
       </div>
     );
 }
