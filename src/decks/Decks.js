@@ -58,10 +58,14 @@ function Decks() {
               </div>
   
               <div className="d-flex gap-2 mt-3">
-                <Link to={`/decks/${deck.id}`} className="btn btn-secondary">View</Link>
-                <Link to={`/decks/${deck.id}/study`} className="btn btn-primary">Study</Link>
-                <button className="btn btn-danger ms-auto" onClick={() => handleDeleteDeck(deck.id)}>
-                  Delete
+                <Link to={`/decks/${deck.id}`} className="btn btn-secondary">
+                <i class="bi bi-eye"> View</i>
+                </Link>
+                <Link to={`/decks/${deck.id}/study`} className="btn btn-primary">
+                <i class="bi bi-book"> Study</i>
+                </Link>
+                <button className="btn btn-danger " onClick={() => handleDeleteDeck(deck.id)}>
+                <i class="bi bi-trash" />
                 </button>
               </div>
             </div>
