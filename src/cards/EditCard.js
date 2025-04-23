@@ -7,27 +7,19 @@ function EditCard() {
     const navigate = useNavigate();
     
 
-    //xTODO: useEffect
     useEffect(() => {
         const abortController = new AbortController(); 
 
         async function loadData() {
             try {
-              // Step 1: Validate deck
               const deckResponse = await fetch(`http://mockhost/decks/${deckId}`, {
                 signal: abortController.signal,
               });
       
-            //   if (!deckResponse.ok) throw new Error("Deck not found");
-            //   await deckResponse.json(); // We don't need to save deck here
-      
-              // Step 2: Fetch card
               const cardResponse = await fetch(
                 `http://mockhost/decks/${deckId}/cards/${cardId}`,
                 { signal: abortController.signal }
               );
-      
-            //   if (!cardResponse.ok) throw new Error("Card not found");
       
               const data = await cardResponse.json();
               setCard({ front: data.front, back: data.back });
@@ -35,9 +27,9 @@ function EditCard() {
               if (error.name !== "AbortError") {
                 console.error("Redirecting due to error:", error.message);
                 if (error.message === "Deck not found") {
-                  navigate("/"); // Invalid deck → home
+                  navigate("/");
                 } else {
-                  navigate(`/decks/${deckId}`); // Invalid card → deck page
+                  navigate(`/decks/${deckId}`); 
                 }
               }
             }
@@ -47,7 +39,6 @@ function EditCard() {
           return () => abortController.abort();
         }, [deckId, cardId, navigate]);
 
-    //TODO: handleSubmit
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -69,12 +60,9 @@ function EditCard() {
             console.error("failed to update card:", error);
         }
     };
-
-    //hook up buttons 
     
     return (
         <div>
-            {/* breadcrumb nav */}
             <nav>
                 <Link to="/">Home</Link> | <Link to={`/decks/${deckId}`}>Deck</Link> | Edit Card {cardId}
             </nav>

@@ -16,18 +16,25 @@ function App() {
       <div className="container">
       <Routes>
         <Route path="/" element={<Decks />}></Route>
-        <Route path="/decks/:deckId" element={<Deck />}></Route>
-        <Route path="/decks/:deckId/cards/:cardId" element={<Card />}></Route>
-        <Route path="/decks/:deckId/cards/:cardId/edit" element={<EditCard />}></Route>
-        <Route path="/decks/new" element={<CreateDeck />}></Route>
-        <Route path="/decks/:deckId/study" element={<Study />}></Route>
-        <Route path="/decks/:deckId/edit" element={<EditDeck />}></Route>
-        <Route path="/decks/:deckId/cards/new" element={<AddCard />}></Route>
+
+        <Route path="/decks">
+          <Route path="/decks/new" element={<CreateDeck />} />
+
+          <Route path=":deckId" element={<Deck />}>
+            <Route path="edit" element={<EditDeck />} />
+            <Route path="study" element={<Study />} />
+
+            <Route path="cards">
+              <Route path="new" element={<AddCard />} />
+              <Route path=":cardId" element={<Card />} />
+              <Route path=":cardId/edit" element={<EditCard />}/>
+            </Route>
+          </Route>
+        </Route>
        
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       </div>
-
     </>
   );
 }

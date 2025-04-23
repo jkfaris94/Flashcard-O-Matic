@@ -8,7 +8,6 @@ function Deck() {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    //fetch data from mock API
     useEffect(() => {
       const abortController = new AbortController();
 
@@ -51,7 +50,6 @@ function Deck() {
     return (
       
         <div>
-             {/* Breadcrumb navigation */}
       <nav>
         <Link to="/">Home</Link> / {deck.name}
       </nav>
