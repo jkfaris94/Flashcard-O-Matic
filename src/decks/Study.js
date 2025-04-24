@@ -74,7 +74,7 @@ function Study() {
           <div className="card-body">
             <h5 className="card-title">Card {cardIndex + 1} of {cards.length}</h5>
             <p className="card-text">
-              {showBack ? card.back : card.front}
+              {showBack ? <><strong>A:</strong> {card.back}</> : <> <strong>Q:</strong> {card.front}</>}
             </p>
             <button className="btn btn-secondary me-2" onClick={handleFlip}>
               Flip
