@@ -39,8 +39,9 @@ function Decks() {
     };
 
     return (
-        <div className="container">
+        <div className="container p-3">
         <div className="mb-4">
+          <div className="container"></div>
           <Link to="/decks/new" className="btn btn-secondary">
           <i class="bi bi-plus-lg"> Create Deck </i>
           </Link>
