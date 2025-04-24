@@ -29,10 +29,12 @@ function Card ({ card, deckId }) {
           </div>
           <div className="d-flex justify-content-end">
             <Link to={`/decks/${deckId}/cards/${card.id}/edit`}>
-              <button className="btn btn-secondary mr-2">Edit</button>
+              <button className="btn btn-secondary me-2">
+                <i class="bi bi-pencil-square"> Edit </i>
+              </button>
             </Link>
             <button className="btn btn-danger" onClick={handleDeleteCard}>
-              Delete
+            <i class="bi bi-trash" /> 
             </button>
           </div>
         </div>
