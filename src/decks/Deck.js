@@ -59,16 +59,18 @@ function Deck() {
 
         {/* action buttons */}
         <div style={{ marginBottom: "1rem" }}>
-        <Link to={`/decks/${deckId}/edit`}>
-          <button>Edit</button>
+        <Link to={`/decks/${deckId}/edit`} className="btn btn-secondary">
+        <i class="bi bi-pencil-square"> Edit </i>
         </Link>
-        <Link to={`/decks/${deckId}/study`}>
-          <button>Study</button>
+        <Link to={`/decks/${deckId}/study`} className="btn btn-primary">
+        <i class="bi bi-book"> Study </i>
         </Link>
-        <Link to={`/decks/${deckId}/cards/new`}>
-          <button>Add Cards</button>
+        <Link to={`/decks/${deckId}/cards/new`} className="btn btn-primary">
+        <i class="bi bi-plus-lg"> Add Cards </i>
         </Link>
-        <button onClick={handleDeleteDeck}>Delete</button>
+        <button onClick={handleDeleteDeck} className="btn btn-danger">
+          <i class="bi bi-trash" /> 
+        </button>
       </div>
       {/* Cards List */}
       <h3>Cards</h3>
