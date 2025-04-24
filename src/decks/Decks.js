@@ -42,7 +42,7 @@ function Decks() {
         <div className="container">
         <div className="mb-4">
           <Link to="/decks/new" className="btn btn-secondary">
-            + Create Deck
+          <i class="bi bi-plus-lg"> Create Deck </i>
           </Link>
         </div>
   
