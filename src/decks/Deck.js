@@ -79,7 +79,6 @@ function Deck() {
             ) : (
               <p>No cards in this deck.</p>
             )}
-          <Outlet />
       </div>
     );
 }
