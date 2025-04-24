@@ -58,7 +58,7 @@ function Deck() {
         <p>{deck.description}</p>
 
         {/* action buttons */}
-        <div style={{ marginBottom: "1rem" }}>
+        <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
         <Link to={`/decks/${deckId}/edit`} className="btn btn-secondary">
         <i class="bi bi-pencil-square"> Edit </i>
         </Link>
