@@ -8,8 +8,6 @@ function EditCard() {
   const [deck, setDeck] = useState(null);
   const [formData, setFormData] = useState({ front: "", back: "" });
 
-  console.log("EditCard rendered");
-
   useEffect(() => {
     const abortController = new AbortController();
   
