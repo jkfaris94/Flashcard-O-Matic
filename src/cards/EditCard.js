@@ -23,8 +23,15 @@ function EditCard() {
           `http://mockhost/decks/${deckId}/cards/${cardId}`,
           { signal: abortController.signal }
         );
+
+        if (!cardResponse.ok) {
+          navigate(`/decks/${deckId}`);
+          return;
+        }
+
         const cardData = await cardResponse.json();
         setFormData({ front: cardData.front, back: cardData.back });
+        
       } catch (error) {
         if (error.name !== "AbortError") {
           console.error("Failed to load data:", error);
