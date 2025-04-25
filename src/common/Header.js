@@ -1,8 +1,8 @@
 function Header () {
     return (
         
-        <div class="bg-dark text-start text-light p-4">
-            <div class="container" >
+        <div className="bg-dark text-start text-light p-4">
+            <div className="container" >
                 <h1>Flashcard-O-Matic</h1>
                 <p>Discover The Flashcard Difference</p>
             </div>

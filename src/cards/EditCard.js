@@ -4,46 +4,41 @@ import CardForm from "./CardForm";
 
 function EditCard() {
   const { deckId, cardId } = useParams();
-  const [formData, setFormData] = useState({ front: "", back: "" });
-  const [deck, setDeck] = useState(null);
   const navigate = useNavigate();
+  const [deck, setDeck] = useState(null);
+  const [formData, setFormData] = useState({ front: "", back: "" });
+
+  console.log("EditCard rendered");
 
   useEffect(() => {
     const abortController = new AbortController();
-
-    async function loadData() {
+  
+    async function loadCard() {
       try {
-        const deckResponse = await fetch(`http://mockhost/decks/${deckId}`, {
+        const cardResponse = await fetch(`http://mockhost/decks/${deckId}/cards/${cardId}`, {
           signal: abortController.signal,
         });
-        const deckData = await deckResponse.json();
-        setDeck(deckData);
-
-        const cardResponse = await fetch(
-          `http://mockhost/decks/${deckId}/cards/${cardId}`,
-          { signal: abortController.signal }
-        );
-
-        if (!cardResponse.ok) {
+  
+        if (cardResponse.status === 404) {
           navigate(`/decks/${deckId}`);
           return;
         }
-
+  
         const cardData = await cardResponse.json();
         setFormData({ front: cardData.front, back: cardData.back });
-        
+        setDeck({ id: deckId, name: `Deck ${deckId}` }); 
+  
       } catch (error) {
         if (error.name !== "AbortError") {
-          console.error("Failed to load data:", error);
+          console.error("Failed to load card:", error);
           navigate("/");
         }
       }
     }
-
-    loadData();
+  
+    loadCard();
     return () => abortController.abort();
   }, [deckId, cardId, navigate]);
-
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
@@ -70,7 +65,9 @@ function EditCard() {
     }
   };
 
-  if (!deck) return <p>Loading...</p>;
+  if (!deck || formData.front === "" && formData.back === "") {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
